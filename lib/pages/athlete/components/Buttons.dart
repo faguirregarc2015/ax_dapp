@@ -1,5 +1,6 @@
 import 'package:ax_dapp/dialogs/buy/BuyDialog.dart';
 import 'package:ax_dapp/dialogs/buy/bloc/BuyDialogBloc.dart';
+import 'package:ax_dapp/dialogs/mint/bloc/MintDialogBloc.dart';
 import 'package:ax_dapp/dialogs/sell/SellDialog.dart';
 import 'package:ax_dapp/dialogs/sell/bloc/SellDialogBloc.dart';
 import 'package:ax_dapp/pages/scout/dialogs/AthletePageDialogs.dart';
@@ -57,14 +58,20 @@ Container sellButton(BuildContext context, AthleteScoutModel athlete,
 
 Container mintButton(BuildContext context, AthleteScoutModel athlete,
     bool isPortraitMode, double containerWdt) {
-  return Container(
+    return Container(
       width: isPortraitMode ? containerWdt / 3 : 175,
       height: 50,
+      // if portrait mode, use 1/3 of container width
       decoration: boxDecoration(Colors.transparent, 100, 2, Colors.white),
       child: TextButton(
           onPressed: () => showDialog(
               context: context,
-              builder: (BuildContext context) => MintDialog(athlete)),
+              builder: (BuildContext context) => BlocProvider(
+                  create: (BuildContext context) => MintDialogBloc(
+                      wallet: GetTotalTokenBalanceUseCase(Get.find()),
+                      lspController: Get.find()),
+                  child: MintDialog(
+                      athlete))),
           child:
               Text("Mint", style: textStyle(Colors.white, 20, false, false))));
 }
