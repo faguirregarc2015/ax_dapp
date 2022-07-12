@@ -1,4 +1,6 @@
+import 'package:ax_dapp/bloc/bloc/response_bloc.dart';
 import 'package:ax_dapp/contracts/ERC20.g.dart';
+
 import 'package:ax_dapp/service/Controller/Controller.dart';
 import 'package:ax_dapp/contracts/APTRouter.g.dart';
 import 'package:ax_dapp/contracts/Dex.g.dart';
@@ -64,6 +66,8 @@ class PoolController extends GetxController {
 
     BigInt transferAmountA = tokenAAmount;
     BigInt transferAmountB = tokenBAmount;
+    var bloc;
+    bloc = ResponseBloc();
     print("Before try");
     try {
       print("[Console] Pool Controller -> Before approve");
@@ -72,10 +76,13 @@ class PoolController extends GetxController {
       controller.updateTxString(txStringA);
       txStringB = await tokenB.approve(routerMainnetAddress, transferAmountB,
           credentials: controller.credentials);
+
       controller.updateTxString(txStringB);
       print("[Console] Pool Controller -> Approved");
+      bloc.add(ResponseSuccessEvent());
     } catch (e) {
       print("[Console] Error happens");
+      bloc.add(ResponseErrorEvent());
       throw Exception(e.toString());
     }
   }
@@ -92,19 +99,26 @@ class PoolController extends GetxController {
 
     EthereumAddress to = await controller.credentials.extractAddress();
     Credentials credentials = controller.credentials;
+    var bloc;
 
-    String txString = await _aptRouter.addLiquidity(
-        tokenAAddress,
-        tokenBAddress,
-        amountADesired,
-        amountBDesired,
-        amountAMin,
-        amountBMin,
-        to,
-        twoMinuteDeadline,
-        credentials: credentials);
+    bloc = ResponseBloc();
+    try {
+      String txString = await _aptRouter.addLiquidity(
+          tokenAAddress,
+          tokenBAddress,
+          amountADesired,
+          amountBDesired,
+          amountAMin,
+          amountBMin,
+          to,
+          twoMinuteDeadline,
+          credentials: credentials);
 
-    controller.updateTxString(txString);
+      controller.updateTxString(txString);
+      bloc.add(ResponseSuccessEvent());
+    } catch (e) {
+      bloc.add(ResponseErrorEvent());
+    }
   }
 
   Future<void> approveRemove() async {
@@ -119,6 +133,7 @@ class PoolController extends GetxController {
         await walletController.getTokenBalance(lpTokenPairAddress)));
     BigInt approveAmount =
         (lpTokenBalance * BigInt.from(removePercentage)) ~/ BigInt.from(100);
+
     print("[Console-Debug] approveAmount: $approveAmount");
     try {
       print("[Console] Pool Controller -> Before approve");
@@ -140,10 +155,8 @@ class PoolController extends GetxController {
     print("[Console-Debug] removeAmount: $liquidity");
     BigInt amountAMin = BigInt.zero;
     BigInt amountBMin = BigInt.zero;
-    EthereumAddress tokenAAddress =
-        EthereumAddress.fromHex("$lpTokenAAddress");
-    EthereumAddress tokenBAddress =
-        EthereumAddress.fromHex("$lpTokenBAddress");
+    EthereumAddress tokenAAddress = EthereumAddress.fromHex("$lpTokenAAddress");
+    EthereumAddress tokenBAddress = EthereumAddress.fromHex("$lpTokenBAddress");
 
     Credentials credentials = controller.credentials;
     EthereumAddress to = await controller.credentials.extractAddress();

@@ -1,3 +1,4 @@
+import 'package:ax_dapp/bloc/bloc/response_bloc.dart';
 import 'package:ax_dapp/pages/pool/AddLiquidity/bloc/PoolBloc.dart';
 import 'package:ax_dapp/service/ApproveButton.dart';
 import 'package:ax_dapp/service/AthleteTokenList.dart';
@@ -24,6 +25,7 @@ class _AddLiquidityState extends State<AddLiquidity> {
       TextEditingController();
   final TextEditingController _tokenAmountTwoController =
       TextEditingController();
+  bool? show;
 
   @override
   void initState() {
@@ -35,6 +37,12 @@ class _AddLiquidityState extends State<AddLiquidity> {
     _tokenAmountOneController.dispose();
     _tokenAmountTwoController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    show = BlocProvider.of<ResponseBloc>(context).state.sucessful;
   }
 
   var isReadOnly = true;
@@ -564,12 +572,13 @@ class _AddLiquidityState extends State<AddLiquidity> {
                 ),
                 showYouReceived(poolInfo.recieveAmount),
                 ApproveButton(
-                    elementWdt * 0.95,
-                    40,
-                    "Approve",
-                    bloc.poolController.approve,
-                    bloc.poolController.addLiquidity,
-                    transactionConfirmed)
+                  elementWdt * 0.95,
+                  40,
+                  "Approve",
+                  bloc.poolController.approve,
+                  bloc.poolController.addLiquidity,
+                  show! == true ? transactionConfirmed : transactionConfirmed,
+                )
               ],
             ),
           );
