@@ -1,4 +1,3 @@
-import 'package:ax_dapp/bloc/bloc/response_bloc.dart';
 import 'package:ax_dapp/pages/LandingPage.dart';
 import 'package:ax_dapp/repositories/CoinGeckoRepo.dart';
 import 'package:ax_dapp/repositories/MlbRepo.dart';
@@ -31,37 +30,32 @@ void main() async {
   final _getPairInfoUseCase = GetPairInfoUseCase(_subGraphRepo);
   final _getSwapInfoUseCase = GetSwapInfoUseCase(_getPairInfoUseCase);
   print("Graph QL CLient initialized}");
-  runApp(MultiProvider(
-    providers: [
-      Provider<ResponseBloc>(create: (_) => ResponseBloc()),
-    ],
-    child: GraphQLProvider(
-      client: _gQLClient,
-      child: MultiRepositoryProvider(
-        providers: [
-          RepositoryProvider(create: (context) => _subGraphRepo),
-          RepositoryProvider(
-            create: (context) => MLBRepo(_mlbApi),
-          ),
-          RepositoryProvider(
-            create: (context) => NFLRepo(),
-          ),
-          RepositoryProvider(
-            create: (context) => CoinGeckoRepo(_coinGeckoApi),
-          ),
-          RepositoryProvider(create: (context) => _getPairInfoUseCase),
-          RepositoryProvider(create: (context) => _getSwapInfoUseCase),
-          RepositoryProvider(
-              create: (context) => GetBuyInfoUseCase(_getSwapInfoUseCase)),
-          RepositoryProvider(
-              create: (context) => GetSellInfoUseCase(_getSwapInfoUseCase)),
-          RepositoryProvider(
-              create: (context) => GetPoolInfoUseCase(_getPairInfoUseCase)),
-          RepositoryProvider(
-              create: (context) => GetAllLiquidityInfoUseCase(_subGraphRepo)),
-        ],
-        child: MyApp(),
-      ),
+  runApp(GraphQLProvider(
+    client: _gQLClient,
+    child: MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => _subGraphRepo),
+        RepositoryProvider(
+          create: (context) => MLBRepo(_mlbApi),
+        ),
+        RepositoryProvider(
+          create: (context) => NFLRepo(),
+        ),
+        RepositoryProvider(
+          create: (context) => CoinGeckoRepo(_coinGeckoApi),
+        ),
+        RepositoryProvider(create: (context) => _getPairInfoUseCase),
+        RepositoryProvider(create: (context) => _getSwapInfoUseCase),
+        RepositoryProvider(
+            create: (context) => GetBuyInfoUseCase(_getSwapInfoUseCase)),
+        RepositoryProvider(
+            create: (context) => GetSellInfoUseCase(_getSwapInfoUseCase)),
+        RepositoryProvider(
+            create: (context) => GetPoolInfoUseCase(_getPairInfoUseCase)),
+        RepositoryProvider(
+            create: (context) => GetAllLiquidityInfoUseCase(_subGraphRepo)),
+      ],
+      child: MyApp(),
     ),
   ));
 }
