@@ -1,4 +1,3 @@
-import 'package:ax_dapp/bloc/bloc/response_bloc.dart';
 import 'package:ax_dapp/pages/pool/AddLiquidity/bloc/PoolBloc.dart';
 import 'package:ax_dapp/service/ApproveButton.dart';
 import 'package:ax_dapp/service/AthleteTokenList.dart';
@@ -37,12 +36,6 @@ class _AddLiquidityState extends State<AddLiquidity> {
     _tokenAmountOneController.dispose();
     _tokenAmountTwoController.dispose();
     super.dispose();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    show = BlocProvider.of<ResponseBloc>(context).state.sucessful;
   }
 
   var isReadOnly = true;
