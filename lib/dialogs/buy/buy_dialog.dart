@@ -47,7 +47,7 @@ class _BuyDialogState extends State<BuyDialog> {
   Widget toggleLongShortToken(double wid, double hgt) {
     return Container(
       padding: const EdgeInsets.all(1.5),
-      width: wid * 0.25,
+      width: wid * 0.30,
       height: hgt * 0.05,
       decoration: boxDecoration(Colors.transparent, 20, 1, Colors.grey[800]!),
       child: Row(
