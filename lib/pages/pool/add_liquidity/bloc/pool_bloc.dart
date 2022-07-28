@@ -180,6 +180,7 @@ class PoolBloc extends Bloc<PoolEvent, PoolState> {
         tokenAInput: token0InputAmount,
         tokenBInput: state.token1AmountInput,
       );
+      print('[Console] -> $response');
       final isSuccess = response.isLeft();
       if (isSuccess) {
         final poolInfo = response.getLeft().toNullable()!.pairInfo;
@@ -194,6 +195,7 @@ class PoolBloc extends Bloc<PoolEvent, PoolState> {
         add(Token1InputChanged(token1InputAmount.toString()));
       } else {
         // TODO(anyone): Create User facing error messages https://athletex.atlassian.net/browse/AX-466
+        print('[Console] -> $isSuccess');
         emit(state.copyWith(status: BlocStatus.noData));
       }
     } catch (e) {

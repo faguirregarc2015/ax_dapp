@@ -53,6 +53,7 @@ class _AddLiquidityState extends State<AddLiquidity> {
     return BlocBuilder<PoolBloc, PoolState>(
       buildWhen: (previous, current) => current != previous,
       builder: (context, state) {
+        print('[Console] Status -> ${state.status}');
         final bloc = context.read<PoolBloc>();
         final poolInfo = state.poolPairInfo;
         final balance0 = state.balance0;
@@ -211,8 +212,11 @@ class _AddLiquidityState extends State<AddLiquidity> {
           String tokenInput,
           bool hasData,
         ) {
+          print('[Console] Status of the onTokenInputChange-> ${state.status}');
           final _tokenInput = tokenInput.isEmpty ? '0' : tokenInput;
+          print('[Console] -> tokenInput before debouncer');
           _debouncer.run(() {
+            print('[Console] -> checking if it has data $hasData');
             if (hasData) {
               if (tokenNumber == 1) {
                 bloc.add(Token0InputChanged(_tokenInput));
@@ -222,6 +226,7 @@ class _AddLiquidityState extends State<AddLiquidity> {
                     tokenTwoAmount.toStringAsFixed(6);
               }
             } else {
+              _tokenAmountTwoController.text = 100.toString();
               if (tokenNumber == 1) {
                 bloc.add(Token0InputChanged(_tokenInput));
               } else {
@@ -325,6 +330,7 @@ class _AddLiquidityState extends State<AddLiquidity> {
                             child: TextButton(
                               onPressed: () {
                                 _tokenAmountOneController.text = balance0;
+                                print('[Console] StatusA -> ${state.status}');
                                 if (state.status == BlocStatus.success) {
                                   onTokenInputChange(
                                     tknNum,
@@ -363,6 +369,7 @@ class _AddLiquidityState extends State<AddLiquidity> {
                                   : !isReadOnly,
                               controller: tokenAmountController,
                               onChanged: (tokenInput) {
+                                print('[Console] StatusB -> ${state.status}');
                                 if (state.status == BlocStatus.success) {
                                   onTokenInputChange(
                                     tknNum,
