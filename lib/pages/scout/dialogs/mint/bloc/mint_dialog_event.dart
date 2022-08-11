@@ -9,7 +9,7 @@ class OnLoadDialog extends MintDialogEvent {
   OnLoadDialog({required this.athleteId});
   final int athleteId;
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [athleteId];
 }
 
 class OnNewMintInput extends MintDialogEvent {
