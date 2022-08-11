@@ -5,6 +5,7 @@ import 'package:ax_dapp/dialogs/buy/buy_dialog.dart';
 import 'package:ax_dapp/dialogs/sell/bloc/sell_dialog_bloc.dart';
 import 'package:ax_dapp/dialogs/sell/sell_dialog.dart';
 import 'package:ax_dapp/pages/scout/dialogs/athlete_page_dialogs.dart';
+import 'package:ax_dapp/pages/scout/dialogs/mint/bloc/mint_dialog_bloc.dart';
 import 'package:ax_dapp/pages/scout/models/athlete_scout_model.dart';
 import 'package:ax_dapp/repositories/subgraph/usecases/get_buy_info_use_case.dart';
 import 'package:ax_dapp/repositories/subgraph/usecases/get_sell_info_use_case.dart';
@@ -101,7 +102,13 @@ Container mintButton(
       onPressed: () {
         showDialog<void>(
           context: context,
-          builder: (BuildContext context) => MintDialog(athlete),
+          builder: (BuildContext context) => BlocProvider(
+            create: (BuildContext context) => MintDialogBloc(
+              wallet: GetTotalTokenBalanceUseCase(Get.find()),
+              lspController: Get.find(),
+            ),
+            child: MintDialog(athlete),
+          ),
         );
       },
       child:
