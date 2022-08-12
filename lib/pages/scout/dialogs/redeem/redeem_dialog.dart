@@ -112,7 +112,11 @@ class _RedeemDialogState extends State<RedeemDialog> {
                           ),
                           child: TextButton(
                             onPressed: () {
-                              bloc.add(OnMaxRedeemTap(widget.athlete.id));
+                              bloc.add(
+                                OnMaxRedeemTap(
+                                  athleteId: widget.athlete.id,
+                                ),
+                              );
                               _longInputController.text = smallestBalance;
                               _shortInputController.text = smallestBalance;
                             },
@@ -193,7 +197,7 @@ class _RedeemDialogState extends State<RedeemDialog> {
                                       }
                                       bloc.add(
                                         OnLongInput(
-                                          double.parse(value),
+                                          longInput: double.parse(value),
                                         ),
                                       );
                                       _shortInputController.text = value;
@@ -276,7 +280,7 @@ class _RedeemDialogState extends State<RedeemDialog> {
                                       }
                                       bloc.add(
                                         OnShortInput(
-                                          double.parse(value),
+                                          shortInput: double.parse(value),
                                         ),
                                       );
                                       _longInputController.text = value;
@@ -387,8 +391,7 @@ class RedeemInformation extends StatelessWidget {
         text: TextSpan(
           children: <TextSpan>[
             TextSpan(
-              text:
-                  "You can redeem APT's at their Book Value for AX.",
+              text: "You can redeem APT's at their Book Value for AX.",
               style: textStyle(
                 Colors.grey[600]!,
                 isWeb ? 14 : 12,

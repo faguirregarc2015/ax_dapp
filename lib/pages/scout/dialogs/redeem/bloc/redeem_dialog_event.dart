@@ -13,7 +13,7 @@ class OnRedeemLoad extends RedeemDialogEvent {
 }
 
 class OnShortInput extends RedeemDialogEvent {
-  OnShortInput(this.shortInput);
+  OnShortInput({required this.shortInput});
 
   final double shortInput;
 
@@ -22,7 +22,7 @@ class OnShortInput extends RedeemDialogEvent {
 }
 
 class OnLongInput extends RedeemDialogEvent {
-  OnLongInput(this.longInput);
+  OnLongInput({required this.longInput});
 
   final double longInput;
 
@@ -31,7 +31,7 @@ class OnLongInput extends RedeemDialogEvent {
 }
 
 class OnMaxRedeemTap extends RedeemDialogEvent {
-  OnMaxRedeemTap(this.athleteId);
+  OnMaxRedeemTap({required this.athleteId});
 
   final int athleteId;
   @override
