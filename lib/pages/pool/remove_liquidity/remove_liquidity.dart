@@ -1,5 +1,4 @@
 import 'package:ax_dapp/pages/pool/my_liqudity/components/pool_remove_approve_button.dart';
-import 'package:ax_dapp/pages/pool/my_liqudity/models/my_liquidity_item_info.dart';
 import 'package:ax_dapp/pages/pool/my_liqudity/my_liquidity.dart';
 import 'package:ax_dapp/pages/pool/remove_liquidity/bloc/remove_liquidity_bloc.dart';
 import 'package:ax_dapp/pages/pool/remove_liquidity/bloc/remove_liquidity_event.dart';
@@ -15,14 +14,12 @@ import 'package:get/get.dart';
 
 class RemoveLiquidity extends StatefulWidget {
   const RemoveLiquidity({
-    required this.infoOfSelectedCard,
     required this.togglePool,
     required this.token0Icon,
     required this.token1Icon,
     super.key,
   });
 
-  final LiquidityPositionInfo infoOfSelectedCard;
   final Function togglePool;
   final AssetImage token0Icon;
   final AssetImage token1Icon;
@@ -227,7 +224,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '${widget.infoOfSelectedCard.token0Symbol}/${widget.infoOfSelectedCard.token1Symbol}'
+                                  '${liquidityPositionInfo.token0Symbol}/${liquidityPositionInfo.token1Symbol}'
                                   ' LP Tokens:',
                                   style: textStyle(
                                     Colors.white,
@@ -270,7 +267,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '''${widget.infoOfSelectedCard.token0Symbol} deposited:''',
+                                  '''${liquidityPositionInfo.token0Symbol} deposited:''',
                                   style: textStyle(
                                     Colors.grey[600]!,
                                     16,
@@ -291,7 +288,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '''${widget.infoOfSelectedCard.token1Symbol} deposited:''',
+                                  '''${liquidityPositionInfo.token1Symbol} deposited:''',
                                   style: textStyle(
                                     Colors.grey[600]!,
                                     16,
@@ -356,7 +353,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                                     width: 10,
                                   ),
                                   Text(
-                                    widget.infoOfSelectedCard.token0Symbol,
+                                    liquidityPositionInfo.token0Symbol,
                                     style: textStyle(
                                       Colors.white,
                                       16,
@@ -404,7 +401,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                                     width: 10,
                                   ),
                                   Text(
-                                    widget.infoOfSelectedCard.token1Symbol,
+                                    liquidityPositionInfo.token1Symbol,
                                     style: textStyle(
                                       Colors.white,
                                       16,
@@ -444,8 +441,8 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                             approveCallback: bloc.poolController.approveRemove,
                             confirmCallback: bloc.poolController.removeLiquidity,
                             confirmDialog: removalConfirmed,
-                            currencyOne: widget.infoOfSelectedCard.token0Symbol,
-                            currencyTwo: widget.infoOfSelectedCard.token1Symbol,
+                            currencyOne: liquidityPositionInfo.token0Symbol,
+                            currencyTwo: liquidityPositionInfo.token1Symbol,
                             valueOne: tokenOneRemoveAmount,
                             valueTwo: tokenTwoRemoveAmount,
                             lpTokens: liquidityPositionInfo.lpTokenPairBalance,
@@ -453,7 +450,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                             percentRemoval: percentRemoval,
                             walletId: userWalletAddress.walletAddress,
                             lpTokenName:
-                                '${widget.infoOfSelectedCard.token0Symbol}/${widget.infoOfSelectedCard.token1Symbol}',
+                                '${liquidityPositionInfo.token0Symbol}/${liquidityPositionInfo.token1Symbol}',
                           ),
                           const Spacer(),
                           Container(
