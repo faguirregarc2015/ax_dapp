@@ -54,11 +54,8 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
         final bloc = context.read<RemoveLiquidityBloc>();
         final tokenOneRemoveAmount = state.tokenOneRemoveAmount;
         final tokenTwoRemoveAmount = state.tokenTwoRemoveAmount;
-        final lpTokenPairBalance = state.lpTokenPairBalance;
-        final shareOfPool = state.shareOfPool;
+        final liquidityPositionInfo = state.liquidityPositionInfo;
         final percentRemoval = state.percentRemoval;
-        final lpTokenOneAmount = state.lpTokenOneAmount;
-        final lpTokenTwoAmount = state.lpTokenTwoAmount;
         if (state.status == BlocStatus.initial) {
           bloc.add(PageRefreshEvent());
         }
@@ -239,7 +236,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                                   ),
                                 ),
                                 Text(
-                                  lpTokenPairBalance,
+                                  liquidityPositionInfo.lpTokenPairBalance,
                                   style: textStyle(
                                     Colors.white,
                                     16,
@@ -260,7 +257,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                                   ),
                                 ),
                                 Text(
-                                  '$shareOfPool%',
+                                  '${liquidityPositionInfo.shareOfPool}%',
                                   style: textStyle(
                                     Colors.white,
                                     16,
@@ -281,7 +278,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                                   ),
                                 ),
                                 Text(
-                                  lpTokenOneAmount,
+                                  liquidityPositionInfo.token0LpAmount,
                                   style: textStyle(
                                     Colors.white,
                                     16,
@@ -302,7 +299,7 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                                   ),
                                 ),
                                 Text(
-                                  lpTokenTwoAmount,
+                                  liquidityPositionInfo.token1LpAmount,
                                   style: textStyle(
                                     Colors.white,
                                     16,
@@ -451,8 +448,8 @@ class _RemoveLiquidityState extends State<RemoveLiquidity> {
                             currencyTwo: widget.infoOfSelectedCard.token1Symbol,
                             valueOne: tokenOneRemoveAmount,
                             valueTwo: tokenTwoRemoveAmount,
-                            lpTokens: lpTokenPairBalance,
-                            shareOfPool: shareOfPool,
+                            lpTokens: liquidityPositionInfo.lpTokenPairBalance,
+                            shareOfPool: liquidityPositionInfo.shareOfPool,
                             percentRemoval: percentRemoval,
                             walletId: userWalletAddress.walletAddress,
                             lpTokenName:

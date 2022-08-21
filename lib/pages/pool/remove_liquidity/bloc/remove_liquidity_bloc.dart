@@ -25,20 +25,14 @@ class RemoveLiquidityBloc
     Emitter<RemoveLiquidityState> emit,
   ) {
     emit(state.copyWith(status: BlocStatus.loading));
-    try {
-      poolController
+    poolController
       ..lpTokenAAddress = liquidityPositionInfo.token0Address
       ..lpTokenBAddress = liquidityPositionInfo.token1Address
       ..lpTokenPairAddress = liquidityPositionInfo.lpTokenPairAddress;
+    try {
       emit(
         state.copyWith(
-          lpTokenPairBalance: liquidityPositionInfo.lpTokenPairBalance,
-          shareOfPool: liquidityPositionInfo.shareOfPool,
-          lpTokenOneAmount: liquidityPositionInfo.token0LpAmount,
-          lpTokenTwoAmount: liquidityPositionInfo.token1LpAmount,
-          tokenOneAddress: liquidityPositionInfo.token0Address,
-          tokenTwoAddress: liquidityPositionInfo.token1Address,
-          lpTokenPairAddress: liquidityPositionInfo.lpTokenPairAddress,
+          liquidityPositionInfo: liquidityPositionInfo,
           percentRemoval: 0,
           tokenOneRemoveAmount: 0,
           tokenTwoRemoveAmount: 0,
@@ -56,9 +50,9 @@ class RemoveLiquidityBloc
     final input = event.removeInput;
     try {
       final tokenOneRemoveAmount =
-          double.parse(state.lpTokenOneAmount) * (input / 100);
+          double.parse(liquidityPositionInfo.token0LpAmount) * (input / 100);
       final tokenTwoRemoveAmount =
-          double.parse(state.lpTokenTwoAmount) * (input / 100);
+          double.parse(liquidityPositionInfo.token1LpAmount) * (input / 100);
       poolController.removePercentage = input;
       emit(
         state.copyWith(
