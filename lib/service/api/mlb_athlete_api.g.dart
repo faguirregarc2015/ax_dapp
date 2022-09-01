@@ -144,6 +144,25 @@ class _MLBAthleteAPI implements MLBAthleteAPI {
   }
 
   @override
+  Future<MLBAthletePriceStats> getPlayerPriceHistory(id, from, interval) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'from': from,
+      r'interval': interval
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MLBAthletePriceStats>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/players/${id}/history/price',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MLBAthletePriceStats.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<List<MLBAthleteStats>> getPlayersHistory(
       playerIds, from, until) async {
     const _extra = <String, dynamic>{};

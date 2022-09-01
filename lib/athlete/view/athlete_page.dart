@@ -73,7 +73,8 @@ class _AthletePageState extends State<AthletePage> {
       },
       child: kIsWeb
           ? BlocBuilder<AthletePageBloc, AthletePageState>(
-              buildWhen: (previous, current) => previous.stats != current.stats,
+              buildWhen: (previous, current) => true,
+
               builder: (_, state) {
                 final chartStats = state.stats;
                 return buildWebView(athlete, chartStats);

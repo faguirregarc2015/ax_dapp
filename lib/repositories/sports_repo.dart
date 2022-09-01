@@ -22,7 +22,11 @@ abstract class SportsRepo<SportAthlete> {
     String position,
   );
 
-  Future<dynamic> getPlayerStatsHistory(int id, String from, String until);
+  Future<dynamic> getPlayerStatsHistory(int id, String from, String interval);
+
+  Future<dynamic> getPlayerPriceHistory(
+      int id,
+      String from, String interval,);
 
   Future<List<dynamic>> getPlayersStatsHistory(
     List<int> ids,

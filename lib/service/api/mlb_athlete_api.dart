@@ -1,5 +1,6 @@
 import 'package:ax_dapp/service/api/models/player_ids.dart';
 import 'package:ax_dapp/service/athlete_models/mlb/mlb_athlete.dart';
+import 'package:ax_dapp/service/athlete_models/mlb/mlb_athlete_price.dart';
 import 'package:ax_dapp/service/athlete_models/mlb/mlb_athlete_stats.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
@@ -39,6 +40,13 @@ abstract class MLBAthleteAPI {
     @Query('from') String from,
     @Query('until') String until,
   );
+
+  @GET('/players/{id}/history/price')
+  Future<MLBAthletePriceStats> getPlayerPriceHistory(
+      @Path() int id,
+      @Query('from') String from,
+      @Query('interval') String interval,
+      );
 
   @POST('/players/history')
   Future<List<MLBAthleteStats>> getPlayersHistory(

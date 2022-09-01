@@ -2,6 +2,7 @@ import 'package:ax_dapp/repositories/sports_repo.dart';
 import 'package:ax_dapp/service/api/mlb_athlete_api.dart';
 import 'package:ax_dapp/service/api/models/player_ids.dart';
 import 'package:ax_dapp/service/athlete_models/mlb/mlb_athlete.dart';
+import 'package:ax_dapp/service/athlete_models/mlb/mlb_athlete_price.dart';
 import 'package:ax_dapp/service/athlete_models/mlb/mlb_athlete_stats.dart';
 import 'package:ax_dapp/service/supported_athletes/supported_mlb_athletes.dart';
 import 'package:tokens_repository/tokens_repository.dart';
@@ -60,6 +61,15 @@ class MLBRepo extends SportsRepo<MLBAthlete> {
     String until,
   ) async {
     return _api.getPlayerHistory(id, from, until);
+  }
+
+  @override
+  Future<MLBAthletePriceStats> getPlayerPriceHistory(
+      int id,
+      String from,
+      String interval,
+      ) async {
+    return _api.getPlayerPriceHistory(id, from, interval);
   }
 
   @override

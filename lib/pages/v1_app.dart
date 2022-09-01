@@ -40,7 +40,7 @@ class V1App extends StatefulWidget {
 
 class _V1AppState extends State<V1App> {
   bool isWeb = true;
-  final isNflEnabled = false;
+  final isNflEnabled = true;
 
   // state change variables
   Pages pageNumber = Pages.scout;

@@ -76,15 +76,15 @@ class AthletePageBloc extends Bloc<AthletePageEvent, AthletePageState> {
           final playerId = event.playerId;
           emit(state.copyWith(status: BlocStatus.loading));
           final now = DateTime.now();
-          final startDate = DateTime(now.year, now.month - 10, now.day);
+          final startDate = DateTime(now.year, now.month - 1, now.day);
           final formattedDate = DateFormat('yyyy-MM-dd').format(now);
           final formattedStartDate = DateFormat('yyyy-MM-dd').format(startDate);
           final until = formattedDate;
           final from = formattedStartDate;
-          final stats = await nflRepo.getPlayerStatsHistory(
+          final stats = await nflRepo.getPlayerPriceHistory(
             playerId,
             from,
-            until,
+            '1d',
           );
           final graphStats = stats.statHistory
               .map(
@@ -119,12 +119,13 @@ class AthletePageBloc extends Bloc<AthletePageEvent, AthletePageState> {
           final formattedStartDate = DateFormat('yyyy-MM-dd').format(startDate);
           final until = formattedDate;
           final from = formattedStartDate;
-          final stats = await mlbRepo.getPlayerStatsHistory(
+          final stats = await mlbRepo.getPlayerPriceHistory(
             playerId,
-            from,
-            until,
+            '2022-06-02',
+            '1d',
           );
-          final graphStats = stats.statHistory
+          final graphStats = stats.priceHistory
+
               .map(
                 (stat) => GraphData(
                   DateFormat('yyy-MM-dd').parse(stat.timeStamp),
