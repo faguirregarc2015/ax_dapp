@@ -12,7 +12,8 @@ MLBAthletePriceStats _$MLBAthletePriceStatsFromJson(
       id: json['id'] as int,
       name: json['name'] as String,
       priceHistory: (json['price_history'] as List<dynamic>)
-          .map((e) => MLBStats.fromJson(e as Map<String, dynamic>))
+          .map(
+              (e) => MLBAthletePriceHistory.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
