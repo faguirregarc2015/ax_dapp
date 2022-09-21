@@ -1007,6 +1007,7 @@ class _AthletePageState extends State<AthletePage> {
                             isPortraitMode: _isPortraitMode,
                             containerWdt: _width,
                             isLongApt: aptTypeSelection.isLong,
+                            goToTradePage: widget.goToTradePage,
                           );
                         },
                       )
@@ -1029,6 +1030,7 @@ class _AthletePageState extends State<AthletePage> {
                         valueInAX: '',
                         isPortraitMode: _isPortraitMode,
                         containerWdt: _width,
+                        goToTradePage: widget.goToTradePage,
                       )
                     ],
                   ),
@@ -1377,6 +1379,7 @@ class _AthletePageState extends State<AthletePage> {
                                 isPortraitMode: _isPortraitMode,
                                 containerWdt: containerWdt,
                                 isLongApt: aptTypeSelection.isLong,
+                                goToTradePage: widget.goToTradePage,
                               );
                             },
                           )
@@ -1399,6 +1402,7 @@ class _AthletePageState extends State<AthletePage> {
                             valueInAX: '',
                             isPortraitMode: _isPortraitMode,
                             containerWdt: containerWdt,
+                            goToTradePage: widget.goToTradePage,
                           )
                         ],
                       ),
