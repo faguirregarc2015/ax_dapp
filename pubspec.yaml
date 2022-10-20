@@ -69,6 +69,8 @@ dependencies:
   wallet_repository:
     path: packages/wallet_repository
   webfeed: ^0.7.0
+  magic_sdk: ^0.3.0
+
 
 dependency_overrides:
   async: 2.8.0
@@ -138,6 +140,7 @@ flutter:
     - assets/images/apt_inverted.png
     - assets/images/weth_small.png
     - assets/images/USDC_small.png
+    - assets/images/magic_logo.png
 
 flutter_icons:
   android: 'launcher_icon'
