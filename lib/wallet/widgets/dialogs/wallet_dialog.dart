@@ -5,6 +5,7 @@ import 'package:ax_dapp/wallet/widgets/dialogs/connect_metamask_dialog.dart';
 import 'package:ax_dapp/wallet/widgets/dialogs/wrong_network_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:magic_sdk/magic_sdk.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WalletDialog extends StatelessWidget {
@@ -160,6 +161,52 @@ class WalletDialog extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white),
                       ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 30),
+                  width: constraints.maxWidth < 450
+                      ? constraints.maxWidth * 0.62
+                      : constraints.maxWidth * 0.22,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(color: Colors.grey[400]!, width: 2),
+                  ),
+                  child: TextButton(
+                    onPressed: () async {
+                      await Magic("apiKey")
+                          .auth
+                          .loginWithMagicLink(email: "athletexmarkets@gmail.com"); // Athletex email as a PLACEHOLDER -- PLEASE REMOVE 
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/magic_logo.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const Text(
+                          'Magic',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'OpenSans',
+                            fontSize: 16,
+                          ),
+                        ),
+                        //empty container
+                        Container(
+                          margin: const EdgeInsets.only(left: 20),
+                        ),
+                      ],
                     ),
                   ),
                 ),
