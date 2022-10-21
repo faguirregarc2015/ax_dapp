@@ -27,6 +27,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
+import 'package:magic_sdk/magic_sdk.dart';
 import 'package:shared/shared.dart';
 import 'package:tokens_repository/tokens_repository.dart';
 import 'package:tracking_repository/tracking_repository.dart';
@@ -44,6 +45,8 @@ void main() async {
   final cache = CacheClient();
 
   final httpClient = http.Client();
+
+  Magic.instance = Magic("pk_live_A0EFC48FF2C1D624");
 
   await initHiveForFlutter();
 

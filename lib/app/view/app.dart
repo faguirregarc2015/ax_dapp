@@ -7,6 +7,7 @@ import 'package:config_repository/config_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:magic_sdk/magic_sdk.dart';
 import 'package:tokens_repository/tokens_repository.dart';
 import 'package:tracking_repository/tracking_repository.dart';
 import 'package:wallet_repository/wallet_repository.dart';
@@ -60,18 +61,23 @@ class _MaterialApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AthleteX',
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      theme: ThemeData(
-        canvasColor: Colors.transparent,
-        brightness: Brightness.dark,
-        primaryColor: Colors.yellow[700],
-        colorScheme: ColorScheme.fromSwatch(brightness: Brightness.dark)
-            .copyWith(secondary: Colors.black),
-      ),
-      home: const LandingPage(),
-    );
+    return Stack(
+      children: [
+        MaterialApp(
+          title: 'AthleteX',
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/',
+          theme: ThemeData(
+            canvasColor: Colors.transparent,
+            brightness: Brightness.dark,
+            primaryColor: Colors.yellow[700],
+            colorScheme: ColorScheme.fromSwatch(brightness: Brightness.dark)
+                .copyWith(secondary: Colors.black),
+          ),
+          home: const LandingPage(),
+        ),
+        Magic.instance.relayer
+      ],
+    ); 
   }
 }
