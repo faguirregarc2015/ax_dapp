@@ -473,6 +473,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.9"
+  flutter_web_auth:
+    dependency: transitive
+    description:
+      name: flutter_web_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -709,6 +716,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  magic_ext_oauth:
+    dependency: "direct main"
+    description:
+      name: magic_ext_oauth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   magic_sdk:
     dependency: "direct main"
     description:
@@ -1274,6 +1288,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  uri:
+    dependency: transitive
+    description:
+      name: uri
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   url_launcher:
     dependency: "direct main"
     description:
